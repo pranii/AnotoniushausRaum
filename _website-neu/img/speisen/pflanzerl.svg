@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Platzhalter">
+<defs><filter id="r"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+<g filter="url(#r)" fill="none" stroke="#8a897d" stroke-linecap="round">
+<ellipse cx="200" cy="215" rx="150" ry="112" stroke-width="3"/>
+<ellipse cx="200" cy="212" rx="150" ry="112" stroke-width="1.4" opacity=".7"/>
+<ellipse cx="200" cy="213" rx="104" ry="76" stroke-width="2"/>
+<circle cx="172" cy="206" r="34" stroke-width="3"/><circle cx="232" cy="222" r="34" stroke-width="3"/><path d="M152 200c8 5 18 7 27 5M214 218c9 5 20 6 29 3" stroke-width="1.6"/>
+</g>
+<text x="200" y="372" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#9c9復">Fleischpflanzerl</text>
+<text x="200" y="392" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#b3ab93">Platzhalter · PNG hier ersetzen</text>
+</svg>

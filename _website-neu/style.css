@@ -1,0 +1,373 @@
+/* Kneitinger im Antoniushaus – Stylesheet */
+
+@font-face{font-family:"Literata";src:url("fonts/literata-latin-wght-normal.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Literata";src:url("fonts/literata-latin-wght-italic.woff2") format("woff2");font-weight:200 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Oswald";src:url("fonts/oswald-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+
+:root{
+  --gruen:#376721;      /* Logo-Grün */
+  --gruen-dunkel:#24401a;
+  --rot:#6a0b0f;        /* Akzent der bisherigen Website */
+  --creme:#f6f2e9;
+  --papier:#fbf9f4;
+  --tinte:#1f2421;
+  --grau:#5b605b;
+  --linie:#e2dccd;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --label:"Oswald","Arial Narrow",Arial,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--serif);font-size:18px;line-height:1.65;color:var(--tinte);background:var(--papier);-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--gruen)}
+a:hover{color:var(--rot)}
+:focus-visible{outline:3px solid var(--rot);outline-offset:3px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:100;background:#fff;padding:.5rem .8rem}
+
+h1,h2,h3{font-weight:600;line-height:1.15;color:var(--gruen-dunkel);letter-spacing:-.01em}
+h1{font-size:clamp(2.3rem,6vw,3.8rem)}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);margin-bottom:1.1rem}
+h3{font-size:1.25rem;margin-bottom:.4rem}
+p+p{margin-top:1rem}
+.label{font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;color:var(--rot);display:block;margin-bottom:.6rem}
+.lead{font-size:1.15rem}
+.muted{color:var(--grau)}
+
+section{padding:88px 0}
+.creme{background:var(--creme)}
+
+.btn{display:inline-block;font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.9rem;text-decoration:none;padding:.95rem 1.5rem;border:2px solid var(--gruen);background:var(--gruen);color:#fff;border-radius:2px;line-height:1.2}
+.btn:hover{background:var(--gruen-dunkel);border-color:var(--gruen-dunkel);color:#fff}
+.btn.zweit{background:transparent;color:var(--gruen)}
+.btn.zweit:hover{background:var(--gruen);color:#fff}
+.btn.hell{background:#fff;border-color:#fff;color:var(--gruen-dunkel)}
+.btn.hell:hover{background:transparent;color:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* ---------- Kopfzeile ---------- */
+.kopf{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.97);border-bottom:1px solid var(--linie)}
+.kopf .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.kopf .logo img{height:46px;width:auto}
+.nav{display:flex;gap:26px;list-style:none}
+.nav a{font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.86rem;color:var(--tinte);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--gruen);border-bottom-color:var(--gruen)}
+.menue-btn{display:none;background:none;border:1px solid var(--linie);border-radius:2px;padding:9px 12px;font-family:var(--label);text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;color:var(--tinte);cursor:pointer}
+.menue-btn .striche{display:inline-block;width:18px;height:12px;margin-right:8px;vertical-align:-1px;border-top:2px solid currentColor;border-bottom:2px solid currentColor;position:relative}
+.menue-btn .striche::after{content:"";position:absolute;left:0;right:0;top:3px;border-top:2px solid currentColor}
+@media(max-width:900px){
+  .menue-btn{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--papier);border-bottom:1px solid var(--linie);flex-direction:column;gap:0;padding:6px 20px 14px}
+  .nav.offen{display:flex}
+  .nav li{border-top:1px solid var(--linie)}
+  .nav li:first-child{border-top:0}
+  .nav a{display:block;padding:14px 0;border-bottom:0;font-size:.95rem}
+}
+
+/* ---------- Bühne: Haus wird gezeichnet ---------- */
+.buehne{position:relative;background:var(--papier)}
+.buehne-fix{position:relative;overflow:hidden;padding:56px 0 72px}
+.buehne .ebene{position:absolute;inset:0;pointer-events:none;will-change:transform}
+.buehne .himmel{background:linear-gradient(180deg,#eef3e8 0%,var(--papier) 62%)}
+.buehne .huegel{color:#e6ecdd;top:auto;bottom:-2px;height:38%}
+.buehne .huegel svg{width:100%;height:100%;display:block}
+
+.haus-feld{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px}
+.haus{width:min(46vw,340px);height:auto;overflow:visible}
+.haus-linie{fill:none;stroke:var(--gruen-dunkel);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.haus-fuellung{fill:none;stroke:var(--gruen);stroke-width:2.4;stroke-linecap:round;opacity:1}
+.haus-fuellung .tuer{fill:#e8eee1}
+.haus-fuellung .fenster{fill:#fff}
+.haus-fuellung .knauf{fill:var(--rot);stroke:none}
+
+.silben{display:flex;gap:.55em;font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(.8rem,2vw,1rem);color:var(--grau)}
+.silben span{opacity:.3;transition:opacity .25s,color .25s}
+.silben span.an{opacity:1;color:var(--rot)}
+
+.speisen{position:absolute;inset:0;z-index:1;pointer-events:none}
+/* Die Speisen bleiben in den Außenspalten, damit sie weder das Haus
+   noch die Überschrift oder die Schaltflächen überdecken. */
+.speise{position:absolute;width:clamp(96px,14vw,205px);height:auto;will-change:transform,opacity}
+.speise.s1{left:1%;top:11%}
+.speise.s2{right:2%;top:8%}
+.speise.s3{left:5%;top:43%}
+.speise.s4{right:6%;top:46%}
+.speise.s5{left:1%;bottom:12%}
+.speise.s6{right:1%;bottom:14%}
+
+.buehne-text{position:relative;z-index:3;margin-top:44px;text-align:center}
+.buehne-text .wrap{max-width:46em}
+.buehne-text .label{color:var(--rot)}
+.buehne-text h1 em{font-style:italic;font-weight:400;color:var(--gruen)}
+.buehne-text .lead{margin:1.2rem auto 0;max-width:36em}
+.buehne-text .btns{justify-content:center}
+
+/* Mit JS und erlaubter Bewegung: Bühne wird zur Scroll-Strecke.
+   Alle Maße in vh, damit die Bühne auf jedem Bildschirm in 100vh passt
+   und die Schaltflächen nie unter den Rand rutschen. */
+.anim .buehne{height:300vh}
+.anim .buehne-fix{position:sticky;top:0;height:100vh;padding:max(94px,10vh) 0 4vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.anim .haus{width:auto;height:min(30vh,260px)}
+.anim .haus-feld{gap:1.6vh}
+.anim .buehne-text{margin-top:3.2vh}
+.anim .buehne-text h1{font-size:clamp(1.7rem,4.6vh,3.1rem)}
+.anim .buehne-text .lead{font-size:clamp(.95rem,2vh,1.15rem);margin-top:1.4vh}
+.anim .buehne-text .btns{margin-top:2.4vh}
+.anim .speise{opacity:0}
+.anim .silben span{opacity:.22}
+.anim .silben span.an{opacity:1;color:var(--rot)}
+
+/* Sehr flache Fenster: Fließtext weglassen, Haus und Handlung bleiben */
+@media(max-height:620px){
+  .anim .buehne-text .lead{display:none}
+  .anim .haus{height:22vh}
+}
+@media(max-width:860px){
+  .anim .buehne{height:240vh}
+  .haus{width:min(62vw,280px)}
+  .speise{width:clamp(78px,20vw,130px)}
+  .speise.s3,.speise.s4{display:none}
+}
+
+/* ---------- Gaststube ---------- */
+.stube{padding:96px 0}
+.stube .wrap{display:grid;grid-template-columns:.85fr 1fr;gap:56px;align-items:center}
+.stube-bild{overflow:hidden;border-radius:2px;will-change:transform}
+.stube-bild img{width:100%;aspect-ratio:4/5;object-fit:cover;transform:scale(1.08)}
+@media(max-width:860px){
+  .stube{padding:64px 0}
+  .stube .wrap{grid-template-columns:minmax(0,1fr);gap:28px}
+  .stube-bild img{aspect-ratio:4/3}
+}
+
+.infoleiste{background:var(--gruen-dunkel);color:#e9efe5}
+.infoleiste .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 28px;padding-top:16px;padding-bottom:16px;font-size:.95rem}
+.infoleiste a{color:#fff}
+.infoleiste b{font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;color:#b9cdb0;margin-right:.5rem}
+
+/* ---------- Karten ---------- */
+.kopfzeile{max-width:40em;margin-bottom:40px}
+
+.karten-tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:2px solid var(--linie);margin-bottom:40px}
+.karten-tabs button{font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.9rem;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;padding:14px 18px;color:var(--grau);cursor:pointer}
+.karten-tabs button:hover{color:var(--gruen-dunkel)}
+.karten-tabs button[aria-selected="true"]{color:var(--gruen-dunkel);border-bottom-color:var(--rot)}
+.kein-js .karten-tabs{display:none}
+
+.karte-blatt{max-width:860px}
+/* Ohne JavaScript gibt es keine Reiter: dann stehen alle drei Karten untereinander */
+.kein-js .karte-blatt[hidden]{display:block}
+.kein-js .karte-blatt+.karte-blatt{margin-top:64px}
+.js .nur-ohne-js{display:none}
+.nur-ohne-js{font-size:1.8rem;margin-bottom:1.2rem}
+.blatt-zeit{font-family:var(--label);text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;color:var(--grau);margin-bottom:1.6rem}
+
+.gang{font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.14em;font-size:.92rem;color:var(--rot);margin:2.6rem 0 .2rem;padding-bottom:.5rem;border-bottom:2px solid var(--linie)}
+.gang:first-child,.blatt-zeit+.gang{margin-top:0}
+
+.gerichte{list-style:none}
+.gerichte li{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--linie)}
+.gerichte .was{flex:1}
+.gerichte .was b{font-weight:600}
+.gerichte .was i{font-style:normal;color:var(--grau);font-size:.95rem}
+.gerichte .was b+i::before{content:" · "}
+.gerichte .preis{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;color:var(--gruen-dunkel)}
+.gerichte .preis::after{content:" €";font-weight:400;color:var(--grau)}
+.gerichte.klein li{padding:10px 0;font-size:.98rem}
+.vegan{font-family:var(--label);text-transform:uppercase;letter-spacing:.08em;font-size:.78em;color:var(--gruen)}
+
+.wochen-kasten{background:#fff;border:1px solid var(--linie);border-left:4px solid var(--gruen);padding:28px 30px;margin-bottom:2.6rem}
+.wochen-kasten h3{font-size:1.35rem;margin-bottom:.1rem}
+.wochen-preis{font-family:var(--label);text-transform:uppercase;letter-spacing:.1em;font-size:.84rem;color:var(--rot);margin-bottom:1.2rem}
+.wochentage{list-style:none}
+.wochentage li{padding:11px 0;border-top:1px solid var(--linie)}
+.wochentage b{display:inline-block;min-width:6.6em;font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;color:var(--grau)}
+.wochentage b.zweitgericht{color:var(--rot)}
+.wochentage span{color:var(--grau);font-size:.95rem}
+.wochentage span::before{content:" · "}
+.wochen-extra{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--linie);font-size:.95rem;color:var(--grau)}
+.wochen-extra b{color:var(--gruen-dunkel)}
+
+.zwei-spalten{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.allergene{margin-top:2.6rem;font-size:.92rem;color:var(--grau);font-style:italic}
+
+@media(max-width:600px){
+  .wochen-kasten{padding:22px 20px}
+  .wochentage b{display:block;min-width:0}
+  .zwei-spalten{grid-template-columns:minmax(0,1fr)}
+  .karten-tabs button{padding:12px 10px;font-size:.82rem}
+}
+
+/* ---------- Sanftes Einblenden beim Scrollen ---------- */
+.anim .auf{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
+.anim .auf.da{opacity:1;transform:none}
+
+/* ---------- Küche ---------- */
+.kueche .wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:64px;align-items:start}
+.zitat{font-size:clamp(1.3rem,2.6vw,1.65rem);font-style:italic;color:var(--gruen-dunkel);line-height:1.4;border-left:3px solid var(--rot);padding-left:20px;margin:2rem 0}
+.heimat{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--linie);margin:2rem 0}
+.heimat li{padding:16px 0;border-bottom:1px solid var(--linie);font-size:1.2rem}
+.heimat li small{display:block;font-family:var(--label);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rot)}
+.kueche aside{position:sticky;top:120px;padding-top:40px}
+.kueche aside img{width:100%;max-width:380px;margin:0 auto;opacity:.8}
+@media(max-width:860px){.kueche .wrap{grid-template-columns:minmax(0,1fr);gap:24px}.kueche aside{display:none}}
+
+/* ---------- Reservierung ---------- */
+.reserv .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.telefon{display:inline-block;font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:600;color:var(--gruen-dunkel);text-decoration:none;margin:.4rem 0 1.2rem}
+.telefon:hover{color:var(--rot)}
+.hinweis{border:1px solid var(--rot);color:var(--rot);padding:14px 18px;font-size:.95rem;margin-top:1.4rem;max-width:30em}
+.widget{background:#fff;border:1px solid var(--linie);padding:28px;min-height:200px}
+.widget p{font-size:.92rem;color:var(--grau)}
+.widget .btn{margin-top:18px}
+#resmio-kneitinger-im-antoniushaus{display:flex;justify-content:center}
+@media(max-width:860px){.reserv .wrap{grid-template-columns:minmax(0,1fr);gap:32px}}
+
+/* ---------- Tagung ---------- */
+.tagung{background:var(--gruen-dunkel);color:#e9efe5;padding:0}
+.tagung .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:0;padding:0;max-width:none}
+.tagung .bild{min-height:420px;background:#2c4a20;overflow:hidden}
+/* Über den Rahmen hinaus, damit die Parallaxe keine Kante freilegt. Bewusst über
+   Breite/Höhe statt transform:scale – die Verschiebung überschreibt transform. */
+.tagung .bild img{width:114%;height:114%;max-width:none;margin:-7%;object-fit:cover}
+.tagung .text{padding:80px max(20px,calc((100vw - 1140px)/2 + 20px)) 80px 56px}
+.tagung h2{color:#fff}
+.tagung .label{color:#d8c49b}
+.fakten{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 28px;margin:1.8rem 0 1.4rem;max-width:560px}
+.fakten b{display:block;font-size:2rem;font-weight:600;color:#fff;line-height:1.1}
+.fakten span{font-size:.85rem;color:#b9cdb0}
+@media(max-width:900px){
+  .tagung .wrap{grid-template-columns:minmax(0,1fr)}
+  .tagung .bild{min-height:0}
+  .tagung .bild img{aspect-ratio:16/10}
+  .tagung .text{padding:48px 20px 64px}
+  .fakten{gap:8px 18px}
+}
+@media(max-width:560px){
+  .fakten{grid-template-columns:minmax(0,1fr);gap:0}
+  .fakten li{display:flex;align-items:baseline;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.15)}
+  .fakten b{min-width:3.2em}
+  .fakten b{font-size:1.6rem}
+}
+
+/* ---------- Jobs ---------- */
+.jobs .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.vorteile{list-style:none;columns:2;column-gap:28px;margin-top:.4rem}
+.vorteile li{break-inside:avoid;padding:10px 0 10px 22px;border-bottom:1px solid var(--linie);position:relative;font-size:.98rem}
+.vorteile li::before{content:"";position:absolute;left:2px;top:1.15em;width:9px;height:2px;background:var(--rot)}
+@media(max-width:860px){.jobs .wrap{grid-template-columns:minmax(0,1fr);gap:28px}}
+@media(max-width:520px){.vorteile{columns:1}}
+
+/* ---------- Öffnungszeiten & Kontakt ---------- */
+.kontakt .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.zeiten{width:100%;border-collapse:collapse;margin-bottom:1.6rem}
+.zeiten caption{text-align:left;font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;color:var(--rot);padding-bottom:.4rem}
+.zeiten th,.zeiten td{text-align:left;padding:12px 0;border-bottom:1px solid var(--linie);font-weight:400}
+.zeiten td{text-align:right;font-weight:600}
+address{font-style:normal;font-size:1.1rem;margin-bottom:1.2rem}
+.kontaktliste{list-style:none}
+.kontaktliste li{padding:10px 0;border-bottom:1px solid var(--linie)}
+.kontaktliste li:first-child{border-top:1px solid var(--linie)}
+.kontaktliste b{display:inline-block;min-width:6.5em;font-family:var(--label);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;color:var(--grau)}
+@media(max-width:860px){.kontakt .wrap{grid-template-columns:minmax(0,1fr);gap:40px}}
+
+/* ---------- Fußzeile ---------- */
+.fuss{background:var(--tinte);color:#c9cdc8;padding:48px 0;font-size:.92rem}
+.fuss .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.fuss img{height:40px;width:auto}
+.fuss nav{display:flex;flex-wrap:wrap;gap:22px}
+.fuss a{color:#fff;text-decoration:none}
+.fuss a:hover{text-decoration:underline;color:#fff}
+
+/* ---------- Rechtstexte ---------- */
+.recht{padding:64px 0 96px}
+.recht .wrap{max-width:780px}
+.recht h1{margin-bottom:2rem}
+.recht h2{font-size:1.5rem;margin:2.6rem 0 .8rem}
+.recht h3{font-size:1.15rem;margin:1.8rem 0 .5rem}
+.recht h4{font-size:1rem;margin:1.4rem 0 .4rem}
+.recht p,.recht li{font-size:1rem}
+.recht ul{margin:.6rem 0 0 1.2rem}
+.recht a{word-break:break-word}
+.pruefen{background:#fff4d6;border-left:4px solid #b8862b;padding:12px 16px;font-family:system-ui,sans-serif;font-size:.9rem;margin:1rem 0}
+
+@media(max-width:600px){
+  body{font-size:17px}
+  section{padding:60px 0}
+  .wrap{padding:0 16px}
+  .tagung .text{padding:44px 16px 56px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ======================================================================
+   Korridor: Das Haus steht fest in der Bildschirmmitte, der Seiteninhalt
+   lässt die Mitte frei und läuft links und rechts daran vorbei.
+   Nur aktiv, wenn JavaScript läuft und Bewegung erlaubt ist.
+   ====================================================================== */
+.anim{--korridor:0px}
+@media(min-width:900px){ .anim{--korridor:200px} }
+@media(min-width:1100px){ .anim{--korridor:250px} }
+
+/* Das Haus selbst: aus dem Seitenfluss gelöst, Lage und Größe setzt main.js */
+.anim .haus-feld{position:fixed;left:0;top:0;z-index:45;margin:0;gap:1.6vh;
+  pointer-events:none;transform-origin:0 0;will-change:transform}
+.anim .haus-linie{filter:drop-shadow(0 1px 2px rgba(255,255,255,.75))}
+/* Über dunklen Abschnitten dreht sich die Farbe um */
+.haus-feld.hell .haus-linie{stroke:#eef3e8;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45))}
+.haus-feld.hell .haus-fuellung{stroke:#bcd3af}
+.haus-feld.hell .haus-fuellung .tuer{fill:rgba(255,255,255,.14)}
+.haus-feld.hell .haus-fuellung .fenster{fill:rgba(255,255,255,.3)}
+.haus-feld.hell .silben span{color:#cfe0c4}
+
+/* Bühne: Das Haus steht unbeweglich in der Mitte, der Text weicht nach
+   oben und unten aus. So wandert beim Übergang nichts durch die Schrift. */
+.anim .buehne-fix{display:block;padding:0}
+.anim .buehne-text{display:flex;flex-direction:column;justify-content:space-between;
+  height:100%;margin:0;padding:max(92px,10.5vh) 0 5vh}
+.anim .buehne-oben .label{margin-bottom:.4rem}
+.anim .buehne-unten .lead{margin:0 auto}
+.anim .buehne-unten .btns{margin-top:2.2vh}
+
+/* --- Abschnitte: Mitte frei halten --- */
+.anim .stube .wrap,
+.anim .reserv .wrap,
+.anim .jobs .wrap,
+.anim .kontakt .wrap{column-gap:var(--korridor)}
+.anim .kueche .wrap{grid-template-columns:1fr 1fr;column-gap:var(--korridor)}
+.anim .infoleiste .wrap{gap:10px var(--korridor)}
+
+/* Karten: die Gerichte laufen zweispaltig um die Mitte herum */
+@media(min-width:900px){
+  .anim #karten .kopfzeile,
+  .anim .karten-tabs,
+  .anim .allergene{max-width:calc(50% - var(--korridor) / 2)}
+  .anim .karten-tabs button{padding:12px 12px;font-size:.8rem}
+  .anim .karte-blatt{max-width:none;columns:2;column-gap:var(--korridor)}
+  .anim .karte-blatt > *{break-inside:avoid}
+  .anim .gang{break-after:avoid}
+  .anim .gerichte li{break-inside:avoid}
+  .anim .zwei-spalten{grid-template-columns:minmax(0,1fr);gap:0}
+  /* Tagung war randlos; im Korridor-Betrieb wird daraus ein normaler
+     zweispaltiger Abschnitt, damit das Haus auf der dunklen Fläche steht
+     statt auf der Naht zum Foto. */
+  .anim .tagung{padding:80px 0}
+  .anim .tagung .wrap{max-width:1140px;margin:0 auto;padding:0 20px;
+    grid-template-columns:1fr 1fr;column-gap:var(--korridor);align-items:center}
+  .anim .tagung .bild{min-height:0}
+  .anim .tagung .bild img{aspect-ratio:4/3}
+  .anim .tagung .text{padding:0}
+}
+
+/* Handy: Auf schmalen Schirmen gibt es keinen Korridor – das Haus bleibt
+   mittig, nimmt sich als kleine Marke aber zurück, damit der Text darunter
+   lesbar bleibt. */
+@media(max-width:899px){
+  .anim .haus-feld.klein{opacity:.4}
+  .anim .haus-feld.klein::before{content:"";position:absolute;inset:-20% -16%;
+    background:radial-gradient(closest-side,rgba(251,249,244,.95),rgba(251,249,244,0));z-index:-1}
+  .anim .haus-feld.klein.hell::before{
+    background:radial-gradient(closest-side,rgba(36,64,26,.95),rgba(36,64,26,0))}
+}

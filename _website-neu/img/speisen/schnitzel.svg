@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Platzhalter">
+<defs><filter id="r"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+<g filter="url(#r)" fill="none" stroke="#8a897d" stroke-linecap="round">
+<ellipse cx="200" cy="215" rx="150" ry="112" stroke-width="3"/>
+<ellipse cx="200" cy="212" rx="150" ry="112" stroke-width="1.4" opacity=".7"/>
+<ellipse cx="200" cy="213" rx="104" ry="76" stroke-width="2"/>
+<path d="M126 206c14-27 54-39 88-32 33 7 58 28 54 48-4 21-40 33-77 30-35-3-58-23-65-46z" stroke-width="3"/><path d="M150 200c8 6 18 9 28 9M176 224c12 4 26 5 38 2M214 196c10 3 19 9 24 16" stroke-width="1.6"/>
+</g>
+<text x="200" y="372" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#9c9復">Schnitzel „Wiener Art“</text>
+<text x="200" y="392" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#b3ab93">Platzhalter · PNG hier ersetzen</text>
+</svg>

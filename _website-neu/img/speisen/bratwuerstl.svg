@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Platzhalter">
+<defs><filter id="r"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+<g filter="url(#r)" fill="none" stroke="#8a897d" stroke-linecap="round">
+<ellipse cx="200" cy="215" rx="150" ry="112" stroke-width="3"/>
+<ellipse cx="200" cy="212" rx="150" ry="112" stroke-width="1.4" opacity=".7"/>
+<ellipse cx="200" cy="213" rx="104" ry="76" stroke-width="2"/>
+<path d="M140 196c34-14 92-14 124 0M138 214c34-14 94-14 126 0M142 232c32-12 88-12 118 0" stroke-width="7" stroke-linecap="round"/>
+</g>
+<text x="200" y="372" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#9c9復">Fränkische Bratwürstl</text>
+<text x="200" y="392" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#b3ab93">Platzhalter · PNG hier ersetzen</text>
+</svg>
