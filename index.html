@@ -705,5 +705,9 @@ document.getElementById('send').onclick = function(){
 var q = new URLSearchParams(location.search).get('paket');
 choose(PACKAGES.some(function(p){ return p.id === q; }) ? q : 'cowork');
 </script>
+<script>
+// Bearbeiten-Modus nur mit ?bearbeiten in der Adresse laden
+if (/[?&]bearbeiten\b/.test(location.search)){ var bx = document.createElement('script'); bx.src = 'bearbeiten.js'; document.body.appendChild(bx); }
+</script>
 </body>
 </html>
