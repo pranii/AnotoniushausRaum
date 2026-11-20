@@ -369,8 +369,8 @@ var MAX_P = 44;
 // unit: 'day' = pro Tag, 'person' = pro Person, 'flat' = pauschal
 var PACKAGES = [
   { id:'cowork', group:'Arbeiten & Vernetzen', name:'Tech-Coworking „Denkraum Pro“', short:'Coworking', price:300, unit:'day', layout:'cowork', persons:[2,44,10], days:true,
-    addons:['snack','lunch','extraScreen','clean'], word:'Team',
-    detail:[['Tech-Coworking „Denkraum Pro“','300 € pro Tag für den ganzen Raum.'],['Getränke- & Snackpauschale','25 € pro Person für den ganzen Tag.'],['Mittagessen aus der Küche','10 € pro Person'],['Reinigung','20 €']] },
+    addons:['snack','lunch','extraScreen','clean'], addonPrice:{ snack:5 }, word:'Team',
+    detail:[['Tech-Coworking „Denkraum Pro“','300 € pro Tag für den ganzen Raum.'],['Getränke- & Snackpauschale','5 € pro Person für den ganzen Tag.'],['Mittagessen aus der Küche','10 € pro Person'],['Reinigung','20 €']] },
   { id:'brunch', group:'Arbeiten & Vernetzen', name:'Teambuilding Brunch', short:'Teambuilding Brunch', price:39, unit:'person', layout:'banquet', persons:[10,44,30],
     addons:['mic','drinks2','yoga'], word:'Brunch' },
   { id:'kreativ', group:'Gestalten', name:'Atelier Plus: Kreativraum', short:'Atelier', price:300, unit:'day', layout:'atelier', persons:[2,20,8], days:true,
@@ -482,15 +482,24 @@ function L_standing(p){
   for (var i=0;i<p;i++){ var q=pos[i%6], a=(i/6|0)*1.3 + (i%6); C.push([q[0]+Math.cos(a)*30, q[1]+Math.sin(a)*30]); }
   return {T:T, C:C, props:[]};
 }
-function L_cowork(p){ // U-Form, bis 44 Plätze
-  var T=[], C=[];
-  for (var i=0;i<5;i++) T.push([140+i*56, 110, 56, 30]);
-  for (var j=0;j<4;j++){ T.push([110, 160+j*44, 30, 44]); T.push([390, 160+j*44, 30, 44]); }
-  for (var a=0;a<10;a++) C.push([130+a*28, 82]);
-  for (var a2=0;a2<10;a2++) C.push([130+a2*28, 150]);
-  for (var b=0;b<8;b++){ C.push([84, 150+b*24]); C.push([416, 150+b*24]); }
-  for (var c=0;c<8;c++){ C.push([150, 180+c*20]); C.push([374, 180+c*20]); }
-  return {T:T, C:C.slice(0,p), props:['display']};
+function L_cowork(p){ // U-Form, bis 44 Plätze. Jeder Platz sitzt direkt an einem Tisch.
+  var T=[], i, j;
+  var TOP=110, SX_L=127, SX_R=377, SY=[147,191,235,279];
+  for (i=0;i<5;i++) T.push([140+i*56, TOP, 56, 30]);            // Kopfreihe 112–392
+  SY.forEach(function(y){ T.push([SX_L, y, 30, 44]); T.push([SX_R, y, 30, 44]); });
+  // Außenplätze als durchgehender Weg um das U: links unten → oben, Kopf links → rechts, rechts oben → unten
+  var outer=[], inner=[];
+  for (j=SY.length-1;j>=0;j--){ outer.push([97, SY[j]+11]); outer.push([97, SY[j]-11]); }
+  for (i=0;i<5;i++){ outer.push([126+i*56, 80]); outer.push([154+i*56, 80]); }
+  for (j=0;j<SY.length;j++){ outer.push([407, SY[j]-11]); outer.push([407, SY[j]+11]); }
+  // Innenplätze, gleicher Weg auf der Innenseite
+  for (j=SY.length-1;j>=0;j--){ inner.push([157, SY[j]+11]); inner.push([157, SY[j]-11]); }
+  for (i=1;i<4;i++){ inner.push([126+i*56, 140]); inner.push([154+i*56, 140]); }
+  for (j=0;j<SY.length;j++){ inner.push([347, SY[j]-11]); inner.push([347, SY[j]+11]); }
+  // Zusammenhängend belegen, von der Mitte der Kopfreihe aus
+  function mid(arr, n){ var s = Math.max(0, Math.floor((arr.length - n) / 2)); return arr.slice(s, s + n); }
+  var C = p <= outer.length ? mid(outer, p) : outer.concat(mid(inner, p - outer.length));
+  return {T:T, C:C, props:['display']};
 }
 function L_uni(p){
   var T=[[150,170,110,70],[330,170,110,70],[150,290,110,60],[330,290,110,60]], C=[];
@@ -599,6 +608,8 @@ var cfgStage = new Stage(document.getElementById('cfgStage'));
 var miniStage = new Stage(document.getElementById('miniStage'));
 var state = { pk:'cowork', persons:10, days:1, half:false, addons:[] };
 function pkg(){ return PACKAGES.filter(function(p){ return p.id === state.pk; })[0]; }
+// Paket kann den Preis eines Extras überschreiben (addonPrice)
+function aPrice(p, k){ return (p.addonPrice && k in p.addonPrice) ? p.addonPrice[k] : ADDONS[k].price; }
 function eur(n){ return n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' €'; }
 
 var pkGroup = null;
@@ -643,8 +654,8 @@ function setPersons(n){
 function buildAddons(){
   var p = pkg(), box = document.getElementById('adList'), h = '';
   p.addons.forEach(function(k){
-    var a = ADDONS[k], incl = (p.incl || []).indexOf(k) >= 0, on = state.addons.indexOf(k) >= 0;
-    var pr = incl ? 'inklusive' : (a.price === null ? (a.label || 'auf Anfrage') : '+ ' + eur(a.price) + (a.unit === 'person' ? ' p. P.' : '') + (a.perDay ? (a.unit === 'person' ? '/Tag' : ' / Tag') : ''));
+    var a = ADDONS[k], ap = aPrice(p, k), incl = (p.incl || []).indexOf(k) >= 0, on = state.addons.indexOf(k) >= 0;
+    var pr = incl ? 'inklusive' : (ap === null ? (a.label || 'auf Anfrage') : '+ ' + eur(ap) + (a.unit === 'person' ? ' p. P.' : '') + (a.perDay ? (a.unit === 'person' ? '/Tag' : ' / Tag') : ''));
     h += '<label class="ad' + (on ? ' on' : '') + (incl ? ' incl' : '') + '" data-k="' + k + '"><input type="checkbox"' + (on ? ' checked' : '') + (incl ? ' disabled' : '') + '><span class="ic">' + imgTag(a) + '</span><span><b>' + a.name + '</b><span>' + pr + '</span></span></label>';
   });
   box.innerHTML = h;
@@ -669,9 +680,10 @@ function calc(){
   state.addons.forEach(function(k){
     var a = ADDONS[k];
     if ((p.incl || []).indexOf(k) >= 0){ L.push([a.name, 'inkl.']); return; }
-    if (a.price === null){ L.push([a.name, 'auf Anfrage']); return; }
-    var v = a.price * (a.unit === 'person' ? state.persons : 1) * (a.perDay ? days : 1);
-    L.push([a.name + (a.unit === 'person' ? ' · ' + state.persons + ' × ' + eur(a.price) : ''), v]); sub += v;
+    var ap = aPrice(p, k);
+    if (ap === null){ L.push([a.name, 'auf Anfrage']); return; }
+    var v = ap * (a.unit === 'person' ? state.persons : 1) * (a.perDay ? days : 1);
+    L.push([a.name + (a.unit === 'person' ? ' · ' + state.persons + ' × ' + eur(ap) : ''), v]); sub += v;
     if (a.unit === 'person') food += v;
   });
   if (p.min){
