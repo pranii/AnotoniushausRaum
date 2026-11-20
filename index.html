@@ -519,16 +519,9 @@ var LAYOUTS = { banquet:L_banquet, dinner:L_dinner, rows:L_rows, standing:L_stan
 
 function Stage(el){
   this.el = el;
-  el.innerHTML = stageSVG(el.id) + '<div class="fx-dim"></div><div class="fx-light"></div><div class="label"></div><div class="cap">Schematische Skizze · 50 m²</div>';
+  // Grafik zeigt nur Raum, Tische und Personen (keine Extras-Icons, Lichteffekte oder Deko)
+  el.innerHTML = stageSVG(el.id) + '<div class="label"></div><div class="cap">Schematische Skizze · 50 m²</div>';
   this.svg = el.querySelector('svg');
-  this.pops = {};
-  var self = this;
-  Object.keys(ADDONS).forEach(function(k){
-    var a = ADDONS[k], d = document.createElement('div');
-    d.className = 'pop'; d.style.left = a.pop[0] + '%'; d.style.top = a.pop[1] + '%';
-    d.innerHTML = imgTag(a) + '<span class="tag">' + a.name.split(' (')[0] + '</span>';
-    el.appendChild(d); self.pops[k] = d;
-  });
 }
 Stage.prototype.render = function(layout, persons, label, addons){
   var L = LAYOUTS[layout](persons), svg = this.svg;
@@ -546,16 +539,8 @@ Stage.prototype.render = function(layout, persons, label, addons){
     g.style.transform = 'translate(' + c[0] + 'px,' + c[1] + 'px)';
     g.classList.remove('off');
   });
-  svg.querySelectorAll('[data-k]').forEach(function(g){ g.classList.toggle('off', L.props.indexOf(g.dataset.k) < 0); });
+  svg.querySelectorAll('[data-k]').forEach(function(g){ g.classList.add('off'); });
   this.el.querySelector('.label').textContent = label;
-  var fx = false, self = this, on = addons || [];
-  Object.keys(this.pops).forEach(function(k){
-    var show = on.indexOf(k) >= 0;
-    self.pops[k].classList.toggle('on', show);
-    if (show && ADDONS[k].fx === 'lights') fx = true;
-  });
-  this.el.classList.toggle('lights', fx);
-  this.el.classList.toggle('evening', ['banquet','dinner','rows','standing'].indexOf(layout) >= 0);
 };
 
 /* ============================ HERO: Autoplay ============================ */
